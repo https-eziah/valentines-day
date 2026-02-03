@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <canvas id="heartCanvas"></canvas>
+
+    <div class="content" id="mainContent">
+      <div id="inputStage">
+        <input type="text" id="nameInput" placeholder="Enter your name..." autocomplete="off">
+      </div>
+
+      <div id="questionStage" class="hidden">
+        <p id="intro"></p>
+        <h1 id="title" class="hidden">Be My Valentine?</h1>
+        <div class="buttons hidden" id="buttons">
+          <button id="yesBtn">Yes</button>
+        </div>
+      </div>
+
+      <div id="final-popup" class="hidden">
+        <h1>I knew it! ❤️</h1>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="hearts-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

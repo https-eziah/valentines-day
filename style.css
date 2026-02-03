@@ -1,0 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 1. Import the fonts at the very top of your CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+/* 2. Main messages: Elegant Serif with slight Italics */
+p, #nameInput {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: #ffc2d1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. The aesthetic cursive for the big Valentine question and Success message */
+#title, #final-popup h1 {
+  font-family: 'Great Vibes', cursive !important;
+  font-weight: 400;
+  /* Adjusting size for better aesthetics */
+  font-size: 50px; 
+  color: #ff4d6d;
+  text-shadow: 0 0 15px rgba(255, 77, 109, 0.4);
+}
+
+/* 4. Soften the message text to look more "aesthetic" */
+#intro {
+  font-weight: 300;
+  font-size: 20px;
+  color: #ffb3c1;
+  opacity: 0.9;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle, #160008, #050002);
+  color: #ffd6df;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 700px;
+  height: 650px;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  width: 65%; /* Keeping text small enough for the heart */
+}
+
+/* Animations */
+@keyframes slideUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-slide { animation: slideUp 1s ease-out forwards; }
+.animate-exit { animation: slideOut 0.8s ease-in forwards; }
+.pop { animation: popIn 1s cubic-bezier(0.17, 0.89, 0.32, 1.28) forwards; }
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: #ff4d6d;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
+}
+
+p {
+  color: #ffb3c1;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ff4d6d;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  outline: none;
+  width: 180px;
+  font-size: 18px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* THE GLOWING PULSE EFFECT */
+@keyframes heartGlow {
+  0% { box-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d; }
+  50% { box-shadow: 0 0 25px #ff4d6d, 0 0 50px #ff758f; }
+  100% { box-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d; }
+}
+
+#yesBtn {
+  padding: 8px 25px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: 'Playfair Display', serif;
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: #a4133c; /* Deeper, vintage red */
+  border: 1px solid #ff4d6d;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  background: #ff4d6d;
+  color: #fff;
+  /* Use relative positioning so it stays inside the heart container */
+  position: relative; 
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: heartGlow 2s infinite ease-in-out;
+  white-space: nowrap;
+  z-index: 1000;
+  /* Start at 0,0 (center) */
+  left: 0;
+  top: 0;
+
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 5; /* Sit slightly behind the title if possible */
+}
+
+/* This is the magic part */
+#yesBtn.transparent-mode {
+  background-color: rgba(255, 77, 109, 0.2) !important; /* Very faint pink */
+  color: rgba(255, 255, 255, 0.5); /* Faint white text */
+  border: 1px solid rgba(255, 77, 109, 0.3);
+  box-shadow: none; /* Remove the glow so it doesn't wash out the title */
+  backdrop-filter: blur(2px); /* Aesthetic glass effect */
+}
+
+/* Styling for the temporary No button */
+#noBtn {
+    padding: 8px 25px;
+    border-radius: 50px;
+    border: 1px solid #5a001a;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    background: #4a0010;
+    color: #ffb3c1;
+    margin-left: 10px;
+    transition: opacity 0.3s ease;
+}
+
+/* Warning popup styling */
+#no-warning {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 77, 109, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+    z-index: 10000;
+}
+
+@keyframes heartGlow {
+  0% { box-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d; }
+  50% { box-shadow: 0 0 25px #ff4d6d, 0 0 50px #ff758f; }
+  100% { box-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d; }
+}
+
+.hidden { display: none !important; }
+
+#final-popup h1 { font-size: 55px; }
+
+/* FALLING HEARTS FIX */
+.heart {
+  position: fixed;
+  top: -10vh; /* Starts above screen */
+  color: #ff5a8f;
+  user-select: none;
+  pointer-events: none;
+  z-index: 999;
+  animation: fall linear forwards;
+}
+
+/* Styling for hearts spawned by clicking the screen */
+.click-heart {
+    position: fixed;
+    pointer-events: none; /* Prevents hearts from blocking other clicks */
+    z-index: 9999;
+    font-size: 24px;
+    color: #ff4d6d;
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
+    animation: floatAndFade 2.5s ease-out forwards;
+    user-select: none;
+}
+
+@keyframes floatAndFade {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -300%) scale(1.5) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+@keyframes heartBurst {
+  0% { filter: drop-shadow(0 0 5px #ff4d6d); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 30px #ff758f); transform: scale(1.1); }
+  100% { filter: drop-shadow(0 0 5px #ff4d6d); transform: scale(1); }
+}
+
+.heart-alive {
+  animation: heartBurst 0.8s infinite alternate ease-in-out !important;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
